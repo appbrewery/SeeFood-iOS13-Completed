@@ -27,7 +27,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func detect(image: CIImage) {
         
         // Load the ML model through its generated class
-        guard let model = try? VNCoreMLModel(for: Inceptionv3().model) else {
+        guard let mlModel = try? Inceptionv3(configuration: .init()).model,
+              let model = try? VNCoreMLModel(for: mlModel) else {
             fatalError("can't load ML model")
         }
         
